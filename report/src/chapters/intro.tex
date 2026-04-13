@@ -1,0 +1,46 @@
+\chapter{Introduction}
+
+\noindent ``CIRCUITRON: Circuit Recognition, Transformation, and Analysis'' is a system to convert hand-drawn electrical circuit diagrams into \gls{spice} compatible netlists enabling simulation and graphical analysis along with digital visualization of the circuit in an editable schematic. The system is also to integrate a prompt-based \gls{ai} assistant to help answer queries related to the relevant circuit.
+
+\section{Background Information}
+
+The first step of learning about electrical and electronic circuits involves looking at and hand-drawing said circuits with the necessary components. These hand-drawn circuit diagrams continue to play an important role in electronics education and early-stage hardware design due to their ease of use, speed, and accessibility. However, such hand-drawn diagrams prove to be limited in their utility in the current education landscape that prioritizes intuitive and visual understanding as they require significant mental gymnastics to facilitate any form of analysis of the circuits, especially when the change in parameters is incorporated.
+
+A slew of rather easy-to-use circuit simulation and analysis tools such as \gls{ltspice} and KiCad exist, of course; and they continue to foster visual learning and analysis of circuits of a range of complexities. But these traditional \gls{eda} tools lack the capability to accept hand-sketched circuit diagrams as input. Instead, users are required to redraw the circuits in software using \gls{gui} tools or by manually entering \gls{spice} netlists; steps that are both tedious and error-prone \cite{reddy2021handdrawn, sertdemir2022img2sim}. Be it due to the (admittedly not very steep yet inconvenient) learning curve of these tools or just the additional effort of having to redraw a circuit digitally (the dullness of which only goes up with circuit complexity), the instructors as well as the students often tend to neglect arguably essential simulation-based intuitive teaching and learning. This again encourages the same long-established rote learning practice instead of ushering in a new and perceptively intuitive way of understanding circuits and electronics at large. And it has been long proven that students tend to perform better when given the appropriate simulative manipulation and concept clarification tools, especially in the context of electrical and electronics circuits \cite{chen2011efficacy}. It then follows that the reluctance to use such tools is actively hindering the students' potential. Thus, the use of visual manipulative simulation tools is the need of the hour. In fact, it has been the need of the hour for quite a while. But, due to a lack of any uber-convenient method, it is yet to be popularly embraced, primarily in technologically nascent countries such as Nepal.
+
+\section{Motivation}
+
+In recent years, the mantra of the modern world has seemingly become ``adapt or die''. The society regularly stomps on the tech-illiterate to make way for the ones willing to champion the use of new and shiny tools in all aspects of their lives. In an increasingly globalized economy, this is especially true for the up-and-coming students who need to compete with other students all over the world relying solely on their understanding of subject matter in their particular fields. In such case, it becomes essential that they are given the tools to enhance their learning and understanding even by minor increments. In the context of electronics, circuits are the fundamental building blocks that permeate each and every aspect of our ``teched-out'' world and it is important for learners in the field to have an intuitively in-depth understanding of this fundamental ingredient. Thus, there exists a motivation for a hassle-free method to analyze and understand circuits to deepen the necessary conception and comprehension.
+
+The motivation stems not only from a deep-seated commitment to give the instructors and students tools to easily visualize and analyze circuits in the belief that it will genuinely improve the quality of professionals and engineers born out of universities, but also from the personal experience of the members involved in this project. As the electronics engineers of the near future who have had and will continue to have to deal with circuits in one form or another, the members involved in this project are uniquely positioned to understand the plight of a beginner in the study of electronics. And a tool which can convert a hand-drawn circuit into a digital schematic and also allow for analysis would go a long way in alleviating that plight.
+
+\section{Problem Statement}
+
+The \gls{eda} tools currently available do not support the direct transformation of hand-drawn circuit images into simulation-ready schematics. There exist a few nascent prototypes for the same but there seems to be no widely adopted, robust, and user-friendly pipeline that combines component recognition, reliable wire connectivity, schematic generation and simulation, whether by itself or by integration with \gls{spice} simulators. 
+
+``CIRCUITRON: Circuit Recognition, Transformation, and Analysis'' project aims to create an integrated system capable of first, recognizing and digitizing hand-drawn circuits into editable schematics and then allowing the user to analyze those circuits through graphs using \gls{spice}-compatible netlists with an added \gls{ai} assistant to handle related queries.
+
+\section{Project Objectives}
+
+\begin{itemize}
+    \item To automatically convert hand-drawn circuit diagrams into \gls{spice}-compatible netlists for simulation.
+    \item To visualize the circuit in an editable schematic in addition to an \gls{ai} assistant for handling simple, relevant queries.
+\end{itemize}
+
+\section{Project Scope and Applications}
+
+\subsection{Project Scope}
+
+This project focuses on the development of a software pipeline that accepts scanned or photographed images of hand-drawn electrical circuits and transforms them into \gls{spice}-compatible netlists for simulation as well as editable schematics through an intermediate integrated data structure to facilitate the transformation. The scope includes detecting common circuit components and their values in mentioned units, inferring wire connectivity with junction recognition and generating a circuit diagram with simulation capabilities. Additionally, the system is to incorporate an \gls{llm}-based query-solving \gls{ai} assistant. The system will support basic circuits and components but will exclude any form of advanced circuit transformation and analysis such as in circuits associated with \gls{rf}, mixed-signal, or \gls{pcb} designs.
+
+\subsection{Project Applications}
+
+\begin{itemize}
+    \item \textbf{Educational utility:} The system is foremost, to be an educational tool designed to assist students and instructors in conveniently digitizing circuit diagrams and understanding circuit behavior through limited simulation and interactive Q\&A.
+    \item \textbf{Lightweight prototyping:} The project is to enable rapid comparison of hand-drawn designs with \gls{spice} simulation results early in the design process for quick feedback and validation.
+    \item \textbf{Mobile simulation tool:} The project in its final form can facilitate quick on-the-go analysis of circuits for students and potentially, field engineers as well.
+\end{itemize}
+
+\subsection{Project Limitations}
+
+Despite its innovative concept, the system is constrained by several factors. First, its accuracy depends heavily on the quality and clarity of input images; low-resolution or messy sketches may lead to recognition errors. The fix for this would obviously be more rigorous training on appropriate training data to chip away at the error but finding the ideal dataset with enough examples for all kinds of components and circuits has proven challenging. Additionally, the system is to support only a fixed set of commonly used components and may fail on rare or user-defined symbols. Wire connectivity assumes standard drawing practices however there is no one way to draw a circuit diagram; non-standard or overlapping wires as well as complicated circuits may confuse the parser. Moreover, the system is to lack a simulation engine of its own and instead use an open-source tool like Ngspice, which not only affects the seamlessness of the user experience but also limits the simulation capabilities to that of Ngspice. For instance, Ngspice needs \gls{spice} models to be imported for complicated circuit elements such as \gls{adc}, \gls{dac}, timers, etc. This means even if the system can recognize these hand-drawn circuit elements, it will not be able to simulate their functionality.

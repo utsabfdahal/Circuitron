@@ -1,0 +1,216 @@
+\chapter{REMAINING TASKS}
+
+As of yet, the individual component/text detection and extraction elements along with node detection and wire connectivity seem to be working. Component detection with fine-tuned YOLOv7 model, text extraction using custom OCR model trained from scratch (working in tandem), and path finding-based wire detection have been achieved. Moreover, these separate modules have been successfully integrated to build a complete project pipeline that takes an image of a circuit and gives out the simulation graphs after selected simulation type (transient analysis, constant voltage analysis, etc). While work on improving the accuracy and robustness of the models will definitely continue in the background until the target values for metrics are reached, the primary goal is to add a few user-focused features. LLM-integration (Gemini) is a major task remaining. Such an LLM-based question-and-answer feature enables users to interact with the system, ask questions about the circuit, and receive direct feedback and analysis based on the simulation results. Integration of authentication and database in the project pipeline is the next step as a facilitating step for users to save a particular circuit for future use. Other minor remaining tasks include effective integration of the built APIs with the frontend of the web-app, and general refinement duties. This leaves the hosting part. For hosting, if possible, a free service (Vercel or Python Anywhere) may be used, or a paid service (Microsoft Azure) can be used.
+
+\section{Summary of Remaining Tasks}
+
+\begin{table}[H]
+    \centering
+    \small
+    \caption{Summary of Remaining Tasks}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{SN} & \textbf{Modules} & \textbf{Remarks} \\
+        \midrule
+        1 & LLM Integration & Gemini integration for question-and-answer feature \\
+        2 & Authentication and Database & For saving and retrieving circuits for future use \\
+        3 & API and Frontend Integration & Effective integration of built APIs with web-app \\
+        4 & System Refinement & General refinement and optimization duties \\
+        5 & Hosting and Deployment & Free (Vercel, PythonAnywhere) or paid (Azure) services \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:remaining-tasks-summary}
+\end{table}
+
+
+% \noindent\textbf{CHAPTER GUIDE:} Purpose: describe unfinished work, risks, and a realistic plan. Must include: What is completed vs pending, Remaining milestones, Risks/blockers + mitigation. LaTeX: Use itemize for checklists; enumerate for ordered milestones.
+
+% \section{Comparative Analysis of Object Detection using YOLOv5 and YOLOv7}
+
+% \subsection{Confusion Matrix}
+
+% To assess per-class performance, confusion matrices were generated using the validation set.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-13: Confusion Matrix for YOLOv5 showing per-class detection performance and misclassification patterns]}}
+%     \caption{Confusion Matrix for YOLOv5}
+%     \label{fig:confusion-matrix-v5-rt}
+% \end{figure}
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-14: Confusion Matrix for YOLOv7 demonstrating improved class separation and fewer misclassifications]}}
+%     \caption{Confusion Matrix for YOLOv7}
+%     \label{fig:confusion-matrix-v7-rt}
+% \end{figure}
+
+% \subsection{Quantitative Results Comparison}
+
+% Final epoch results show \gls{yolo}v7 outperformed \gls{yolo}v5 across all major metrics.
+
+% \begin{table}[htbp]
+%     \centering
+%     \caption{Comparison of Performance Metrics for YOLOv5 and YOLOv7}
+%     \label{table:yolo-comparison-rt}
+%     \begin{tabular}{lrr}
+%         \toprule
+%         \textbf{Metric} & \textbf{YOLOv5} & \textbf{YOLOv7} \\
+%         \midrule
+%         \gls{map}@0.5 & 0.61 & 0.83 \\
+%         \gls{map}@0.5:0.95 & 0.41 & 0.60 \\
+%         Precision & 0.84 & 0.93 \\
+%         Recall & 0.62 & 0.78 \\
+%         Epochs Trained & 200 & 100 \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+
+% Overall, \gls{yolo}v7 showed a clear advantage over \gls{yolo}v5 in our experiments. It not only achieved higher values for precision, recall, and mean average precision but also required fewer epochs to converge. \gls{yolo}v7's confusion matrix reflected better class separation and fewer misclassifications. The improvements in F1 score and overall stability of predictions across confidence thresholds make \gls{yolo}v7 a more robust choice for circuit diagram interpretation.
+
+% \section{\gls{ocr} Results}
+
+% The out-of-the-box default \gls{easyocr} implementation without fine-tuning was able to detect some of the component values from the circuit; however, the results left a lot to be desired. This made it clear that proper training of the recognition model is absolutely essential for this project.
+
+% After training the text recognition model from scratch, results were much improved. Two randomly picked images from the dataset are shown below after passing through the detection (\gls{yolo}v7) and recognition (\gls{ocr}) models.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-15: Text Detection and Recognition (i) showing circuit component values accurately extracted from handwritten diagrams]}}
+%     \caption{Text Detection and Recognition (i)}
+%     \label{fig:ocr-result-1-rt}
+% \end{figure}
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-16: Text Detection and Recognition (ii) demonstrating OCR model accuracy on diverse component labels]}}
+%     \caption{Text Detection and Recognition (ii)}
+%     \label{fig:ocr-result-2-rt}
+% \end{figure}
+
+% It is to be noted that the ``??'' shown in \cref{fig:ocr-result-1-rt} and \cref{fig:ocr-result-2-rt} is a limitation of the picture-rendering library used (OpenCV, Matplotlib), rather than a limitation of the \gls{ocr} model. The \gls{ocr} model accurately identifies symbols like $\mu$ (micro).
+
+% \subsection{Training Loss Curve}
+
+% Due to the limitation of unpaid versions of cloud-based services like Google Colab and Lightning \gls{ai}, only 29 training epochs were successfully run. However, the results in those 29 epochs also seem promising as the training loss steadily decreased.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-17: Training Loss vs Epochs (OCR) showing consistent convergence of the custom text recognition model]}}
+%     \caption{Training Loss vs Epochs (\gls{ocr})}
+%     \label{fig:ocr-training-loss-rt}
+% \end{figure}
+
+% \section{Junction-Based Wire Detection}
+
+% This section presents the experimental results obtained from the proposed junction-based wire detection pipeline applied to circuit diagram images. Each processing stage is evaluated independently and supported with quantitative measurements and visual evidence.
+
+% \subsection{Input Image and Preprocessing}
+
+% The experiment begins with a high-resolution scanned circuit diagram used as the input image. The original image dimensions are reported in terms of width and height in pixels to establish spatial scale consistency throughout the pipeline.
+
+% To enhance structural features and suppress background noise, the input image is converted to grayscale. Otsu's global thresholding method is then applied to automatically compute an optimal threshold value that separates foreground circuit elements from the background. The resulting binary image preserves wires, junctions, and components while eliminating illumination variations.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-18: Otsu's Global Thresholding showing binary conversion of circuit diagram with foreground-background separation]}}
+%     \caption{Otsu's Global Thresholding}
+%     \label{fig:otsu-thresholding-rt}
+% \end{figure}
+
+% \subsection{Skeletonization}
+
+% Morphological skeletonization is applied to the binary image to reduce all wire segments to single pixel-wide centerlines. This transformation significantly reduces the number of foreground pixels while preserving the topological connectivity of the circuit network.
+
+% The reduction in foreground pixel count before and after skeletonization is recorded to quantify structural simplification. Despite aggressive thinning, wire continuity and junction connectivity remain intact, making the skeleton suitable for graph-based analysis.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-19: Skeletonization showing single pixel-wide wire representations while preserving junction connectivity]}}
+%     \caption{Skeletonization}
+%     \label{fig:skeletonization-rt}
+% \end{figure}
+
+% \subsection{Component Removal and Junction Isolation}
+
+% Object detection is performed using a trained \gls{yolo} model to identify and localize elements in the circuit diagram. Detected objects are classified as follows: Class 0 corresponds to text annotations, Class 1 corresponds to junctions, and all remaining classes correspond to circuit components.
+
+% The total number of detected objects per class is reported. To isolate only the wire network, bounding boxes associated with non-junction classes are removed from the skeleton image. This step eliminates component shapes while preserving junction points and interconnecting wires.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-20: Component Removal showing wire network isolation after removing component bounding boxes]}}
+%     \caption{Component Removal}
+%     \label{fig:component-removal-rt}
+% \end{figure}
+
+% \subsection{Junction Extraction and Wire Classification}
+
+% All detected junctions belonging to Class 1 (junctions) are extracted and their coordinates are converted from normalized \gls{yolo} format to pixel coordinates.
+
+% Each junction pair is classified based on geometric alignment. Pairs aligned horizontally are labeled as horizontal wires, pairs aligned vertically are labeled as vertical wires, and diagonally aligned pairs are rejected. The total number of accepted and rejected pairs is reported. Sample coordinate transformations from normalized values to pixel coordinates are also presented.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-21: Wire Classification showing horizontal, vertical, and rejected diagonal wire pairs]}}
+%     \caption{Wire Classification}
+%     \label{fig:wire-classification-rt}
+% \end{figure}
+
+% \subsection{Segment Consolidation Through Merging}
+
+% Initial wire detection may produce fragmented segments representing portions of the same physical wire. To address this, a merging algorithm is applied based on axis alignment tolerance of 16 pixels and overlapping or adjacent segment conditions.
+
+% The total number of raw wire segments before merging and the consolidated count after merging are reported.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-22: Segment Consolidation Through Merging demonstrating reduction of fragmented wire segments into coherent wires]}}
+%     \caption{Segment Consolidation Through Merging}
+%     \label{fig:segment-consolidation-rt}
+% \end{figure}
+
+% \subsection{Component Bounding Box Overlay}
+
+% To enhance visualization and verify correct detection, component bounding boxes detected by \gls{yolo} are overlaid on the original circuit diagram. This overlay confirms that all circuit elements have been properly identified and localized, with bounding boxes accurately delineating component boundaries.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-23: Bounding Box Overlay showing component detection boxes overlaid on original circuit diagram]}}
+%     \caption{Bounding Box Overlay}
+%     \label{fig:bbox-overlay-rt}
+% \end{figure}
+
+% \subsection{Wire-Component Intersection Detection}
+
+% Intersection points between wires and component bounding box edges are computed to identify electrical connectivity. The total number of intersection points is reported along with a directional breakdown for horizontal and vertical wires intersecting specific component edges.
+
+% These intersections form the basis for reconstructing circuit connectivity graphs and netlists.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-24: Wire-Component Intersection Detection showing computed connection points between wires and component boundaries]}}
+%     \caption{Wire-Component Intersection Detection}
+%     \label{fig:wire-component-intersection-rt}
+% \end{figure}
+
+% \section{Frontend Visualization}
+
+% The frontend of the \gls{circuitron} web application provides an interactive environment for circuit design, simulation, and analysis. It enables users to construct electrical circuits using a drag-and-drop schematic editor with grid-based alignment, snap-to-grid functionality, and real-time wire routing. Components such as passive elements, active devices, and sources can be configured through a properties panel that allows precise control over electrical parameters and placement.
+
+% The system integrates simulation controls for transient analysis, allowing users to define time parameters, execute simulations, and visualize results through dynamically rendered voltage-time plots. Measurement probes support real-time signal monitoring with automated computation of key metrics, including maximum, minimum, peak-to-peak range, and \gls{rms} values. Additionally, the frontend supports exporting simulation data and visualizations in standard formats, enabling seamless documentation and further offline analysis.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-25: Digitally Drawn Circuit showing the drag-and-drop schematic editor interface with grid-based component placement and real-time wire routing]}}
+%     \caption{Digitally Drawn Circuit}
+%     \label{fig:digital-circuit-editor-rt}
+% \end{figure}
+
+% \begin{figure}[htbp]
+%     \centering
+%     \fbox{\parbox{0.85\textwidth}{\centering [Figure Placeholder 6-26: Example Circuit Simulation Result displaying voltage-time plots with measurement probes showing maximum, minimum, peak-to-peak, and RMS values]}}
+%     \caption{Example Circuit Simulation Result}
+%     \label{fig:simulation-result-rt}
+% \end{figure}
+

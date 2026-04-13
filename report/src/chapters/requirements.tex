@@ -1,0 +1,98 @@
+﻿\chapter{REQUIREMENTS ANALYSIS}
+
+\section{Software Requirements}
+
+\subsection{Python Libraries}
+
+\gls{python} Programming Language is the heart of the machine learning aspects of the project as well as parts of the backend. \gls{python} with its suite of various packages and libraries is used to facilitate the implementation of models for object detection, text recognition, and even simulation visualization.
+
+\begin{itemize}
+    \item \textbf{NgSpice and PySpice:} After detecting and extracting relevant circuit elements, the project aims to simulate the circuit. \gls{ngspice} is the open-source \gls{spice} simulator for electric and electronic circuits which takes in netlists and enables the simulation and analysis of circuits. And, \gls{pyspice} is a \gls{python} library that provides bindings to \gls{ngspice} to build and simulate circuits entirely within \gls{python}.
+    
+    \item \textbf{PyTorch and TensorFlow:} PyTorch and TensorFlow, both \gls{dl} libraries, which serve as the backbone for training and deploying machine learning models used in the project pipeline. They are used to first integrate existing models, specifically YOLOv7 and \gls{ocr}, into the project and then also fine-tune and train them depending on the need. Also, the seamless integration of these libraries with other widely used \gls{python} libraries, including NumPy and Pandas, streamlines data preprocessing and manipulation. Both PyTorch and TensorFlow, while having different strengths, serve similar purposes for this project and use of one over the other just comes down to personal preference and convenience.
+    
+    \item \textbf{Numpy:} Numpy is an open-source \gls{python} library for all tasks related to numerical computing and data manipulation. CIRCUITRON uses Numpy for array manipulation and pixel-level operations on images. Numpy seamlessly integrates with OpenCV and helps streamline the fundamental processes of image processing like converting images into matrices, performing image-wide as well as element-wise operations important for augmentation, thresholding and segmentation.
+    
+    \item \textbf{OpenCV:} OpenCV is the primary library for pre-processing the circuit images and performing low-level computer vision tasks. It is used in almost all aspects of image processing in the project like thresholding, edge detection, geometric augmentations, contour detection, morphological operations (dilations, erosion) as needed. These operations help in extracting meaningful visual information before feeding the data into the models.
+    
+    \item \textbf{Pandas:} Pandas provides data structures, such as data frames, that allow for efficient handling and manipulation of structured data. It offers functions for reading and writing data from various file formats, data cleaning and preprocessing, filtering and selecting data, grouping and aggregating data, and more. Pandas is used in the project to organize structured data related to the circuit components and their properties which includes storing component lists with attributes like label, value, position, and orientation, managing the intermediate data between detection, parsing, and netlist generation, and exporting tables or logs for debugging or evaluation.
+    
+    \item \textbf{Matplotlib and Plotly:} Matplotlib is a widely used data visualization library in \gls{python}. Matplotlib is used in the project for visualizing the performance metric scores in graphs. Furthermore, it is to be used for plotting simulation outputs with integration with \gls{pyspice}. Plotly is another library for data visualization which supports interactive diagrams (handy for showing simulation graphs in motion).
+    
+    \item \textbf{Scikit-learn:} In context of the project, Scikit-learn is used for post-processing tasks such as clustering junction points, filtering outliers, or classifying ambiguous component types after initial detection. It includes tools for data splitting, metrics, and evaluation which are extremely useful during model development and benchmarking. Additionally, it can assist in component matching, value prediction, or validation models if required.
+    
+    \item \textbf{Seaborn:} Seaborn is a \gls{python} data visualization library based on Matplotlib, designed for creating statistical graphics with attractive default styles. It is used to visualize distributions, such as accuracy of component detection, or \gls{ocr} confidence scores. It is essentially a wrapper for Matplotlib which makes working with graphs more convenient. It can also be used with Pandas to plot trends in simulation outcomes (say, voltage over time across components).
+    
+    \item \textbf{Hugging Face:} Hugging Face provides a large hub of pretrained transformer models for \gls{nlp}, vision, and more, along with the transformers \gls{python} library. It will be used in the project to integrate \glspl{llm} for answering circuit-related queries.
+    
+    \item \textbf{LangChain:} LangChain is a framework that helps build applications powered by \glspl{llm}, focusing on prompt engineering, chaining logic, memory, and tool use. It will be used to build the \gls{llm}-based \gls{ai} assistant for the user interface by integrating circuit data (netlist, components, simulation results, schematics) to provide context-aware answers.
+    
+    \item \textbf{LangGraph:} LangGraph extends LangChain to allow for multi-agent or multi-step workflows using graph-like state machines. It can be used to build structured conversational workflows where the \gls{ai} assistant interacts with different parts of the circuit data pipeline while maintaining session history.
+\end{itemize}
+
+\subsection{YOLOv7}
+
+The YOLOv7 model is used to detect and classify circuit components in hand-drawn circuit images. It outputs bounding boxes, class labels, and confidence scores for each detected component. YOLOv7 is selected due to its superior detection accuracy, efficient training capabilities, and support for multiple object scales through its enhanced architecture. Compared to previous versions like YOLOv5, YOLOv7 delivers better performance in terms of \gls{map} and inference speed.
+
+\subsection{DTRB Framework-Based OCR}
+
+A \gls{crnn}-based \gls{ocr} model trained from scratch, following the DTRB design philosophy for recognizing text is vital for the project as it is the core technology which reads and understands the component values and units of circuit elements. This was chosen for the project because, foremost, other ready-made \gls{ocr} models failed to perform well even after some fine-tuning.
+
+\subsection{KiCad Symbol Library}
+
+KiCad is a free, open-source \gls{eda} suite which offers its libraries to be used freely to build any educational project. The project intends to use the KiCad symbols library, specifically, in order to simply extract the component symbols standardized by KiCad rather than building the icons/representations for components from scratch for use in the frontend schematic.
+
+\subsection{Coding and Training Platforms}
+
+\begin{itemize}
+    \item \textbf{Google Colab:} Google Colab is a cloud-based platform that offers a Jupyter notebook environment for developing deep learning systems. For this project, Google Colab provided with \glspl{gpu} for free, which significantly accelerated the training process, enabling experimentation with larger models and datasets. Colab also comes pre-installed with popular deep learning frameworks such as TensorFlow and PyTorch, widely used for \gls{ml}-related tasks. Leveraging these frameworks, YOLO (v5 and v7) and \gls{ocr} were implemented and experimented on.
+    
+    \item \textbf{Kaggle:} Kaggle is a multi-faceted online platform popular for data science competitions, datasets, code sharing and model training. It was primarily used to find relevant datasets (\gls{cghd}, \gls{vqa}, \gls{hcd}), code sharing and model training. The dataset of choice for this project was also found in Kaggle. Additionally, it provided a fully hosted environment with popular \gls{python} libraries such as Pandas, Numpy, Tensorflow, PyTorch pre-installed to make implementing and training models convenient, especially with its integration with Google Colab. Its free cloud computing service providing 30 hours of \gls{gpu} use per week proved indispensable in accelerating the training and testing of different models.
+    
+    \item \textbf{Lightning AI:} Lightning AI is a cloud workspace, similar to Google Colab and Kaggle, which specializes in helping build agents and train models without any tedious setup. Most importantly, through the use of a student account, it allows for the use of extremely powerful \glspl{gpu} for free (for a reasonable amount of time). Among all the cloud computing services used for the project, Lightning AI proved the most invaluable for implementing and training the models as the \glspl{gpu} it allotted were super-fast and saved a ton of time during the tedious and time-consuming process.
+    
+    \item \textbf{Visual Studio Code:} The local \gls{ide} of choice for this project is VS Code due to its extensive features auto completion, syntax highlighting, and copilot integration. Additional features are further integrated by the use of a suite of easy-to-use extensions which are tailored for each individual project member in their setup as needed. All the code to be run locally is run on VS Code and further down the line, its utility is expected to increase ten-fold during the web development phase.
+\end{itemize}
+
+\subsection{Web Development}
+
+Although the web development part of this project has not kicked into gear as of yet; following are the tools and technologies expected to be used in the process:
+
+\begin{itemize}
+    \item \textbf{Reactjs:} Reactjs will serve as an integral technology underlying the dynamic front-end interfaces to be developed for the project. The frontend for this project is expected to include dynamic elements like dragging, erasing, resizing, etc. of the circuits and circuit elements, and Reactjs is expected to fulfill these requirements with convenience and speed through the use of its features like virtual \gls{dom} abstraction, distinction of code into reusable logic and presentation buckets, etc. as well as compatible packages like react-draggable.
+    
+    \item \textbf{Next.js:} Next.js is a React-based web framework that enables the development of fast, scalable, and server-rendered web applications. It provides features such as routing, server-side rendering, and \gls{api} integration, which are essential for building a responsive and user-friendly frontend. In this project, Next.js is used to develop the client-side interface, enabling efficient interaction with the backend services and smooth visualization of recognition results.
+    
+    \item \textbf{Chart.js:} Chart.js is a lightweight JavaScript library used for creating interactive and visually appealing charts and graphs in web applications. Chart.js is used to visualize analytical results such as performance metrics, recognition accuracy, confidence scores, and statistical summaries on top of the graphs generated after simulation in a clear and intuitive manner. Its ease of integration with modern frontend frameworks and support for real-time data updates make it suitable for presenting system outputs effectively.
+    
+    \item \textbf{FastAPI:} FastAPI is a modern, high-performance \gls{python} web framework used for building RESTful \glspl{api}. It is designed for rapid development, high execution speed, and automatic generation of interactive \gls{api} documentation. In this project, FastAPI is used to implement the backend services that handle requests from the frontend, manage data exchange, and interface with the text recognition and analysis modules. Its native support for asynchronous operations and integration with Pydantic ensures efficient request handling and robust data validation.
+    
+    \item \textbf{Uvicorn:} Uvicorn is a high-performance \gls{asgi} server used to run asynchronous \gls{python} web applications. It is commonly used to serve FastAPI-based backend services due to its low latency and efficient handling of concurrent requests. In this project, Uvicorn is responsible for hosting the backend \gls{api}, ensuring fast communication between the frontend application and the \gls{ocr} processing modules.
+    
+    \item \textbf{Pydantic:} Pydantic is a \gls{python} library used for data validation and schema definition using type annotations. It ensures that data exchanged between the frontend and backend conforms to predefined structures and types. In this project, Pydantic is used to define request and response models, improving data integrity, and reducing runtime errors.
+    
+    \item \textbf{MongoDB:} MongoDB is a NoSQL database which stores data in \gls{json} documents organized into collections. It is to serve the database needs for this project which enables functionalities like saving a digital schematic with its component values, simulation result storage, etc.
+    
+    \item \textbf{Github:} Github is a platform to store, manage and share code with integrated version control. Github enabled effective sharing and backing up of all the code involved in this project as of yet and allowed for all the participants to be on the same page at any given time. Github is expected to be used extensively throughout the project.
+\end{itemize}
+
+\section{Feasibility Study}
+
+\subsection{Technical Feasibility}
+
+Technical Feasibility assesses whether the project can be developed using available resources and expertise. The system leverages well-established technologies such as \gls{python}, OpenCV, custom \gls{ocr}, YOLOv7, Ngspice, FastAPI, Next.js, all of which are stable and widely supported. For component detection, YOLOv7 provides effective object recognition, making it suitable for identifying handwritten circuit symbols. Wire and node detection rely on proven techniques like skeletonization, junction-based wire detection, and clustering (e.g., K-means). Optical Character Recognition (\gls{ocr}) is handled effectively using custom-trained \gls{ocr}, ensuring accuracy even with noisy text. Simulation is facilitated through Ngspice \gls{cli} in tandem with Pyspice. The team consists of skilled electronics and software engineers proficient in these technologies. The primary technical risk involves processing low-quality or cluttered circuit images, but the system is to include manual correction features to mitigate this. Overall, the project is technically feasible, with all necessary tools available and a well-matched skill set.
+
+\subsection{Economic Feasibility}
+
+Economic Feasibility examines whether the project is cost-effective and offers a good return on investment. The estimated costs include NPR 20,000 for computation (Google Colab Pro and cloud \glspl{gpu}), NPR 4,000 for hosting and storage (domain, cloud storage, and database), NPR 2,160 for \gls{ieee} membership (access to research journals), and NPR 15,000 for miscellaneous expenses (printing, presentations, memberships, etc.). Data collection and software licenses incur no cost since open-source datasets and tools are utilized. The total estimated budget is approximately NPR 41,160. Given its potential as an educational tool, the project could even be commercialized for academic institutions. The project is considered economically feasible due to its low development cost for the value it has to the education field.
+
+\subsection{Operational Feasibility}
+
+Operational Feasibility evaluates whether the system will function effectively in real-world scenarios. The tool addresses a genuine need by simplifying the conversion of hand-drawn circuits into simulations, eliminating manual redrawing. Its user-friendly interface allows optional manual edits to improve reliability, and cross-platform accessibility is ensured through a web-based (Next.js and FastAPI). Minimal training is required due to its intuitive design, and performance is optimized with near real-time processing using YOLOv7 and efficient \gls{ocr} techniques. The modular architecture ensures easy maintenance, and the system can be scaled to support additional features in the future. The project is considered operationally feasible.
+
+\subsection{Time Feasibility}
+
+% The project is to be developed in two sequential phases, with Phase A focusing on implementing the core functionality including the circuit recognition and text extraction engine, and netlist generation within a basic web framework. Upon successful completion and testing of these foundational elements, Phase B will expand the system by developing the full web application, integrating NgSpice for simulations with a user-friendly \gls{ui} to display and edit schematic diagrams, and implementing the \gls{ai} question-answering feature; all while maintaining consistency with the pre-designed wireframes. A two-week buffer period has been planned between phases to accommodate thorough testing and necessary adjustments, with Phase B work commencing only after Phase A components have been fully validated. This structured approach ensures the maintenance of design integrity while progressively enabling the deliverance of more advanced features. As of yet, Phase A is advancing at a reasonable pace. The project is considered feasible from a time perspective.
+The project has to be developed in two sequential phases, with Phase A focusing on implementing the core functionality including the circuit recognition and text extraction engine, and netlist generation within a basic web framework. This phase has been successfully completed and tested.
+
+Phase B is supposed to expand the system the system by developing the full web application, integrating NgSpice for simulations with a user-friendly UI to display and edit schematic diagrams, and implementing the AI question-answering feature; all while maintaining consistency with the pre-designed wireframes. A two-week buffer period had been planned between phases to accommodate thorough testing and necessary adjustments, with Phase B work commencing only after Phase A components have been fully validated. This structured approach ensures the maintenance of design integrity while progressively enabling the deliverance of more advanced features. As of yet, phase A has been completed and phase B is also nearly done, and advancing at a reasonable pace. The project is considered feasible from a time perspective.

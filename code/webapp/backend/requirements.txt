@@ -1,0 +1,41 @@
+# FastAPI and related dependencies
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# NGSpice integration for circuit simulation
+PySpice>=1.5
+numpy>=1.26.0
+scipy>=1.11.4
+
+# Computer vision and ML
+opencv-python>=4.8.0
+Pillow>=10.0.0
+torch>=2.1.0
+torchvision>=0.16.0
+scikit-image>=0.22.0
+matplotlib>=3.8.0
+pandas>=2.1.0
+tqdm>=4.66.0
+seaborn>=0.13.0
+
+# Async and HTTP
+httpx>=0.25.2
+aiofiles>=23.2.0
+
+# Development and testing
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+pytest-cov>=4.1.0
+black>=23.11.0
+isort>=5.12.0
+flake8>=6.1.0
+mypy>=1.7.1
+
+# Logging and monitoring
+structlog>=23.2.0
+python-multipart>=0.0.6
+
+# Environment management
+python-dotenv>=1.0.0
