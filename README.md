@@ -153,12 +153,23 @@ Skeleton-based wire connectivity extraction:
 </p>
 <p align="center"><em>Voltage divider circuit with detected wire connections. Lines are correctly traced between the series resistors and voltage source.</em></p>
 
-#### Results: Wheatstone Bridge — Combined Detection Overlay
+#### Results: YOLOv7 Detection on Hand-Drawn Circuit
 
 <p align="center">
-  <img src="Figtoaddinreadme/combined_overlay.png" alt="Combined Detection Overlay" width="70%">
+  <img src="Figtoaddinreadme/retrained_yolov7_result1.png" alt="YOLOv7 Detection Result" width="75%">
 </p>
-<p align="center"><em>Combined overlay on a Wheatstone bridge showing TrOCR-detected text values (component values like resistance) alongside YOLO-detected component names and bounding boxes. Green boxes indicate detected components, blue text shows OCR-read values, and red lines show detected wire connections.</em></p>
+<p align="center"><em>Retrained YOLOv7 detection result on a hand-drawn circuit. Color-coded bounding boxes show detected components — resistors (green), inductors (orange), capacitors (purple), voltage sources (blue), junctions (red), and text labels (blue) — each with class name and confidence score.</em></p>
+
+---
+
+## OCR Results
+
+The OCR engine reads handwritten component values (e.g., 1KΩ, 5V, 1µF, 0.5H) from cropped text regions detected by YOLO. Below are sample OCR predictions (green text above each handwritten label):
+
+<p align="center">
+  <img src="Figtoaddinreadme/OCRresults.png" alt="OCR Results" width="80%">
+</p>
+<p align="center"><em>OCR recognition results on handwritten component values. Green annotations show the model's predicted text for each cropped label — correctly reading values like 1mH, 1µF, 100Ω, 5V, 0.5H, 1KΩ, 0.5µH, 1V, 1µF, 0.3H, 300µF, and 500Ω from hand-drawn text.</em></p>
 
 ---
 
