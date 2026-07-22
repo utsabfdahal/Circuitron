@@ -25,9 +25,9 @@ CIRCUITRON is an end-to-end ML-powered application that converts photographs or 
 
 ---
 
-## System Overview
+## System Overview 
 
-CIRCUITRON processes a hand-drawn circuit image through a four-stage ML pipeline:
+CIRCUITRON processes a hand-drawn circuit image through a four-stage ML pipeline as given below:
 
 ```
 📷 Image Upload → 🔍 YOLO Detection → 📝 OCR Reading → 🔗 Proximity Mapping → 🧵 Line Detection → ⚡ CircuitJS1 Simulation
